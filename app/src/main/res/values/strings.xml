@@ -9,4 +9,12 @@
     <string name="history">History</string>
     <string name="settings">Settings</string>
     <string name="synchronization">Synchronization</string>
+
+    <string name="speed">Speed</string>
+    <string name="average_speed">Average speed</string>
+    <string name="distance">Distance</string>
+    <string name="power">Power</string>
+    <string name="average_power">Average power</string>
+    <string name="time">time</string>
+    <string name="time_to_end">Time to end</string>
 </resources>
