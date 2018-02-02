@@ -5,5 +5,5 @@ package com.blsoft.homecycling.dicts;
  */
 
 public enum DictFragment {
-    HOME, TRAINING, HISTORY
+    HOME, TRAINING, HISTORY, SETTINGS, SYNCHRONIZATION
 }

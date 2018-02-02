@@ -1,13 +1,21 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.blsoft.homecycling.fragments.HomeFragment">
+    tools:context="com.blsoft.homecycling.fragments.HomeFragment"
+    android:columnCount="2"
+    android:orientation="horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+    <Button
+        android:id="@+id/btnTraining"
+        android:text="@string/training" />
+    <Button
+        android:id="@+id/btnHistory"
+        android:text="@string/history"/>
+    <Button
+        android:id="@+id/btnSynchronization"
+        android:text="@string/synchronization"/>
+    <Button
+        android:id="@+id/btnSettings"
+        android:text="@string/settings"/>
+</GridLayout>
