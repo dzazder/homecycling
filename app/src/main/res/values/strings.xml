@@ -17,4 +17,7 @@
     <string name="average_power">Average power</string>
     <string name="time">time</string>
     <string name="time_to_end">Time to end</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="end">End</string>
 </resources>

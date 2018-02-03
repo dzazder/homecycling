@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.blsoft.homecycling.dicts.DictFragment;
 import com.blsoft.homecycling.fragments.HomeFragment;
+import com.blsoft.homecycling.fragments.TrainingFragment;
 import com.blsoft.homecycling.global.ConstStrings;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         switch (fragment) {
             case HOME:
                 newFragment = new HomeFragment();
+                break;
+            case TRAINING:
+                newFragment = new TrainingFragment();
                 break;
         }
         if (!isFinishing()) {

@@ -154,5 +154,27 @@
                 android:text="0" />
         </LinearLayout>
     </GridLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnStart"
+            android:text="@string/start"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnPause"
+            android:text="@string/pause"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnEnd"
+            android:text="@string/end"/>
+    </LinearLayout>
 
 </LinearLayout>
