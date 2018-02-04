@@ -272,7 +272,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
                         {
                             txtAntTime.setText(String.valueOf(estTimestamp));
 
-                            txtSpeed.setText(String.valueOf(calculatedSpeed));
+                            txtSpeed.setText(String.format("%.2f km/h", calculatedSpeed));
                         }
                     });
                 }
@@ -295,10 +295,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
                                 public void run()
                                 {
                                     txtAntTime.setText(String.valueOf(estTimestamp));
-
-                                    txtDistance.setText(String
-                                            .valueOf(calculatedAccumulatedDistance.setScale(3,
-                                                    RoundingMode.HALF_UP)));
+                                    txtDistance.setText(String.format("%f m", calculatedAccumulatedDistance));
                                 }
                             });
                         }
