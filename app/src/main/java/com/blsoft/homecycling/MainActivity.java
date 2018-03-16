@@ -6,7 +6,9 @@ import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.blsoft.homecycling.db.DBManager;
 import com.blsoft.homecycling.dicts.DictFragment;
+import com.blsoft.homecycling.fragments.HistoryFragment;
 import com.blsoft.homecycling.fragments.HomeFragment;
 import com.blsoft.homecycling.fragments.TrainingFragment;
 import com.blsoft.homecycling.global.ConstStrings;
@@ -14,11 +16,14 @@ import com.blsoft.homecycling.global.ConstStrings;
 public class MainActivity extends AppCompatActivity {
 
     public static FragmentManager fragmentManager;
+    private DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbManager = new DBManager(this);
 
         if (savedInstanceState == null) {
             switchFragment(DictFragment.HOME);
@@ -40,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
             case TRAINING:
                 newFragment = new TrainingFragment();
                 break;
+            case HISTORY:
+                newFragment = new HistoryFragment();
+                break;
         }
         if (!isFinishing()) {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -49,5 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
             transaction.commitAllowingStateLoss();
         }
+    }
+
+    public DBManager getDBManager() {
+        return dbManager;
     }
 }

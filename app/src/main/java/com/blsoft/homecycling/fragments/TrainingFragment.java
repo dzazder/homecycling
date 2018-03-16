@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blsoft.homecycling.MainActivity;
 import com.blsoft.homecycling.R;
+import com.blsoft.homecycling.db.DBManager;
 import com.blsoft.homecycling.dicts.TrainingMode;
 import com.blsoft.homecycling.dicts.TrainingState;
 import com.blsoft.homecycling.entitites.TrainingPeek;
@@ -71,6 +73,9 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
     TextView txtAntTime;
     TextView tv_status;
 
+    DBManager dbManager;
+    long trainingID;
+
     final Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
 
@@ -117,6 +122,8 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
         tv_status = view.findViewById(R.id.tv_status);
         txtAntTime = view.findViewById(R.id.txtAntTime);
 
+        dbManager = ((MainActivity)getActivity()).getDBManager();
+
         return view;
     }
 
@@ -140,6 +147,8 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
         trainingState = TrainingState.IN_PROGRESS;
         startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
+
+        trainingID = dbManager.addTraining();
     }
 
     protected void pauseTraining() {
@@ -151,7 +160,11 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
     protected void endTraining() {
         trainingState = TrainingState.FINISHED;
         timerHandler.removeCallbacks(timerRunnable);
-        ArrayList<TrainingPeek> finishedTraining = training;
+
+        //save training
+        for (TrainingPeek trainingPeek: training) {
+            dbManager.addTrainingPeek(trainingID, trainingPeek);
+        }
     }
 
     public void setTrainingMode(TrainingMode trainingMode) {
