@@ -1,5 +1,6 @@
 package com.blsoft.homecycling.entitites;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -8,50 +9,56 @@ import java.util.Date;
 
 public class TrainingPeek {
     private long peekTime;  // time from start training to read peek
-    private double speed;
-    private double power;
-    private double cadence;
+    private BigDecimal speed;
+    private BigDecimal power;
+    private BigDecimal cadence;
+    private BigDecimal distance;
 
     public TrainingPeek() {
 
     }
 
-    public TrainingPeek(long peekTime, double speed, double power, double cadence) {
+    public TrainingPeek(long peekTime, BigDecimal speed, BigDecimal power, BigDecimal cadence, BigDecimal distance) {
         this.peekTime = peekTime;
         this.speed = speed;
         this.power = power;
         this.cadence = cadence;
+        this.distance = distance;
     }
 
     public long getPeekTime() {
         return peekTime;
     }
 
-    public double getSpeed() {
+    public BigDecimal getSpeed() {
         return speed;
     }
 
-    public double getPower() {
+    public BigDecimal getPower() {
         return power;
     }
 
-    public double getCadence() {
+    public BigDecimal getCadence() {
         return cadence;
     }
+
+    public BigDecimal getDistance() { return distance; }
 
     public void setPeekTime(long peekTime) {
         this.peekTime = peekTime;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(BigDecimal speed) {
         this.speed = speed;
     }
 
-    public void setPower(double power) {
+    public void setPower(BigDecimal power) {
         this.power = power;
     }
 
-    public void setCadence(double cadence) {
+    public void setCadence(BigDecimal cadence) {
         this.cadence = cadence;
     }
+
+    public void setDistance(BigDecimal distance) { this.distance = distance; }
 }

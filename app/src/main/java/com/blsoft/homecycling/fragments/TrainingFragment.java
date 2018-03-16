@@ -186,8 +186,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
                     tv_status.setText("Error. Do Menu->Reset.");
                     break;
                 case ADAPTER_NOT_DETECTED:
-                    Toast
-                            .makeText(getActivity(),
+                    Toast.makeText(getActivity(),
                                     "ANT Adapter Not Available. Built-in ANT hardware or external adapter required.",
                                     Toast.LENGTH_SHORT).show();
                     tv_status.setText("Error. Do Menu->Reset.");
@@ -271,15 +270,15 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
                         public void run()
                         {
                             txtAntTime.setText(String.valueOf(estTimestamp));
-
                             txtSpeed.setText(String.format("%.2f km/h", calculatedSpeed));
+
+                            training.add(new TrainingPeek(estTimestamp, calculatedSpeed, new BigDecimal(-1), new BigDecimal(-1), new BigDecimal(-1)));
                         }
                     });
                 }
             });
 
-            bsdPcc
-                    .subscribeCalculatedAccumulatedDistanceEvent(new AntPlusBikeSpeedDistancePcc.CalculatedAccumulatedDistanceReceiver(
+            bsdPcc.subscribeCalculatedAccumulatedDistanceEvent(new AntPlusBikeSpeedDistancePcc.CalculatedAccumulatedDistanceReceiver(
                             new BigDecimal(2.095)) // 2.095m circumference = an average
                             // 700cx23mm road tire
                     {
@@ -296,6 +295,8 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
                                 {
                                     txtAntTime.setText(String.valueOf(estTimestamp));
                                     txtDistance.setText(String.format("%f m", calculatedAccumulatedDistance));
+
+                                    training.add(new TrainingPeek(estTimestamp, new BigDecimal(-1), new BigDecimal(-1), new BigDecimal(-1), calculatedAccumulatedDistance));
                                 }
                             });
                         }
@@ -356,8 +357,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
                                         {
                                             case SUCCESS:
                                                 bcPcc = result;
-                                                bcPcc
-                                                        .subscribeCalculatedCadenceEvent(new AntPlusBikeCadencePcc.ICalculatedCadenceReceiver()
+                                                bcPcc.subscribeCalculatedCadenceEvent(new AntPlusBikeCadencePcc.ICalculatedCadenceReceiver()
                                                         {
                                                             @Override
                                                             public void onNewCalculatedCadence(
@@ -370,6 +370,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
                                                                     @Override
                                                                     public void run()
                                                                     {
+                                                                        // todo pokazywać kadencję
                                                                         //tv_calculatedCadence.setText(String
                                                                         //        .valueOf(calculatedCadence));
                                                                     }
