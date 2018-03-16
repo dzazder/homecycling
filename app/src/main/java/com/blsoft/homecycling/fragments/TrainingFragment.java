@@ -19,6 +19,7 @@ import com.blsoft.homecycling.R;
 import com.blsoft.homecycling.dicts.TrainingMode;
 import com.blsoft.homecycling.dicts.TrainingState;
 import com.blsoft.homecycling.entitites.TrainingPeek;
+import com.blsoft.homecycling.helpers.CalculatorHelper;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeCadencePcc;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeSpeedDistancePcc;
 import com.dsi.ant.plugins.antplus.pcc.defines.BatteryStatus;
@@ -53,6 +54,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
     private long trainingTime = 0;
     private long millis;
 
+    private BigDecimal accumulatedDistance = new BigDecimal(0);
     private ArrayList<TrainingPeek> training = new ArrayList<>();
 
     Button btnStart;
@@ -81,7 +83,9 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
             seconds = seconds % 60;
 
             txtTime.setText(String.format("%d:%02d:%02d", hours, minutes, seconds));
-
+            if (millis > 0) {
+                txtAvgSpeed.setText(String.format("%.2f km/h", CalculatorHelper.calculateAvgSpeed(accumulatedDistance, millis)));
+            }
             timerHandler.postDelayed(this, 500);
         }
     };
@@ -147,6 +151,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
     protected void endTraining() {
         trainingState = TrainingState.FINISHED;
         timerHandler.removeCallbacks(timerRunnable);
+        ArrayList<TrainingPeek> finishedTraining = training;
     }
 
     public void setTrainingMode(TrainingMode trainingMode) {
@@ -270,7 +275,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
                         public void run()
                         {
                             txtAntTime.setText(String.valueOf(estTimestamp));
-                            txtSpeed.setText(String.format("%.2f km/h", calculatedSpeed));
+                            txtSpeed.setText(String.format("%.2f km/h", CalculatorHelper.convertToKmH(calculatedSpeed)));
 
                             training.add(new TrainingPeek(estTimestamp, calculatedSpeed, new BigDecimal(-1), new BigDecimal(-1), new BigDecimal(-1)));
                         }
@@ -295,6 +300,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
                                 {
                                     txtAntTime.setText(String.valueOf(estTimestamp));
                                     txtDistance.setText(String.format("%f m", calculatedAccumulatedDistance));
+                                    accumulatedDistance = calculatedAccumulatedDistance;
 
                                     training.add(new TrainingPeek(estTimestamp, new BigDecimal(-1), new BigDecimal(-1), new BigDecimal(-1), calculatedAccumulatedDistance));
                                 }
